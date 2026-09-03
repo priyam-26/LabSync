@@ -14,6 +14,38 @@ https://priyam-26.github.io/LabSync/
 
 ---
 
+## 📸 Screenshots
+
+Here’s a look at LabSync in action — from submitting a complaint to managing it through the administrator dashboard.
+
+### 🎓 Student Dashboard
+
+The student-facing dashboard provides a clean and straightforward interface for reporting lab equipment issues.
+
+<div align="center">
+  <img src="assets/screenshots/student-dashboard_1.png" width="48%" />
+  &nbsp;
+  <img src="assets/screenshots/student-dashboard_2.png" width="48%" />
+</div>
+
+---
+
+### 🔐 Admin Login
+
+A dedicated login interface keeps the administrative dashboard accessible only to authorized users.
+
+![LabSync Admin Login](assets/screenshots/admin-login.png)
+
+---
+
+### 🛠️ Admin Dashboard
+
+The admin dashboard provides an overview of reported issues along with search, filtering, status management and complaint controls.
+
+![LabSync Admin Dashboard](assets/screenshots/admin-dashboard.png)
+
+---
+
 ## ✨ What LabSync Does
 
 ### 🎓 Student Portal
@@ -107,12 +139,6 @@ LabSync-main/
 - **CSS3** — responsive styling and layout
 - **Vanilla JavaScript** — application logic and interactions
 
-### Backend / Database
-- **Supabase** — PostgreSQL database and authentication
-- **Supabase Auth** — administrator authentication
-- **Row Level Security (RLS)** — database access control
-- **pg_cron** — automatic cleanup of old fixed complaints
-
 ### Architecture
 
 LabSync is intentionally lightweight:
@@ -141,158 +167,6 @@ Admin Dashboard
    ├── Update
    └── Delete
 ```
-
----
-
-## 🚀 Getting Started
-
-### 1. Download / Clone the Project
-
-Clone the repository or download the project files.
-
-```bash
-git clone <https://github.com/priyam-26/LabSync.git>
-cd LabSync-main
-```
-
-Because LabSync is a static frontend, there is no Node.js server or build process required.
-
----
-
-### 2. Create a Supabase Project
-
-Create a new project in **Supabase**.
-
-Once the project is ready, open the **SQL Editor**.
-
----
-
-### 3. Set Up the Database
-
-Run:
-
-```text
-supabase/database.sql
-```
-
-This creates:
-
-- `complaints` table
-- `admins` table
-- Required indexes
-- Row Level Security policies
-- Automatic cleanup for fixed complaints older than 7 days
-
-> ⚠️ The cleanup section uses `pg_cron`. Make sure the extension is available and enabled for your Supabase project before relying on the scheduled cleanup job.
-
----
-
-### 4. Configure Supabase
-
-Open:
-
-```text
-js/config.js
-```
-
-and configure your Supabase project URL and anonymous key:
-
-```javascript
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-```
-
-The frontend uses the Supabase **anon/public key**. Database security should therefore be enforced through the RLS policies in `database.sql`.
-
-> 🔒 Never place a Supabase **service-role key** or other secret backend credentials in this frontend project.
-
----
-
-### 5. Create an Admin Account
-
-In Supabase:
-
-1. Open **Authentication**
-2. Create an administrator user
-3. Copy the user's UUID
-4. Insert that UUID into the `admins` table
-
-Example:
-
-```sql
-insert into public.admins (user_id)
-values ('YOUR_AUTH_USER_UUID');
-```
-
-Only users whose UUID exists in `public.admins` are allowed to read, update or delete complaints.
-
----
-
-### 6. Run the Project
-
-Since this is a static website, you can open the HTML files directly, but using a local development server is recommended.
-
-For example, with Python:
-
-```bash
-python -m http.server 8000
-```
-
-Then open:
-
-```text
-http://localhost:8000
-```
-
-Student portal:
-
-```text
-http://localhost:8000/index.html
-```
-
-Admin dashboard:
-
-```text
-http://localhost:8000/admin.html
-```
-
----
-
-## 🔐 Security Model
-
-LabSync uses **Supabase Row Level Security (RLS)** to separate student and administrator access.
-
-### Students
-
-Students are unauthenticated users and can:
-
-```text
-INSERT → complaints
-```
-
-They cannot directly:
-
-```text
-SELECT → complaints
-UPDATE → complaints
-DELETE → complaints
-```
-
-### Administrators
-
-Authenticated users must also exist in the `admins` table.
-
-Authorized admins can:
-
-```text
-SELECT → complaints
-UPDATE → complaints
-DELETE → complaints
-```
-
-This means the frontend does not rely on simply hiding admin functionality — the database itself enforces access rules.
-
----
 
 ## 🧹 Automatic Complaint Cleanup
 
@@ -346,59 +220,7 @@ LabSync focuses on a few simple principles:
 - **🔐 Secure** — database-level access control with RLS
 - **🛠️ Maintainable** — separate HTML, CSS, JavaScript and SQL files
 
----
-
-## 📸 Screenshots
-
-Here’s a look at LabSync in action — from submitting a complaint to managing it through the administrator dashboard.
-
-### 🎓 Student Dashboard
-
-The student-facing dashboard provides a clean and straightforward interface for reporting lab equipment issues.
-
-![LabSync Student Dashboard](assets/screenshots/student-dashboard.png)
-
----
-
-### 🔐 Admin Login
-
-A dedicated login interface keeps the administrative dashboard accessible only to authorized users.
-
-![LabSync Admin Login](assets/screenshots/admin-login.png)
-
----
-
-### 🛠️ Admin Dashboard
-
-The admin dashboard provides an overview of reported issues along with search, filtering, status management and complaint controls.
-
-![LabSync Admin Dashboard](assets/screenshots/admin-dashboard.png)
-
----
-
-## 🌐 Deployment
-
-Because LabSync is a static frontend, it can be hosted on services such as:
-
-- GitHub Pages
-- Netlify
-- Vercel
-- Cloudflare Pages
-- Any static web server
-
-The Supabase project acts as the backend and database.
-
-For production deployment, make sure:
-
-1. Your Supabase URL and anon key are configured correctly.
-2. RLS policies are enabled.
-3. Only intended administrator accounts are added to `admins`.
-4. No service-role or private Supabase keys are exposed in the frontend.
-5. The database cleanup job is configured correctly.
-
----
-
-## 🧪 Example Use Case
+## 📋 Example Use Case
 
 Imagine a student is working in **Lab 115** and discovers that **System 07** is unable to open VS Code.
 
