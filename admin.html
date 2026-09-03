@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LabSync | Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body class="admin-body">
+
+    <!-- LOGIN -->
+
+    <main id="loginPage" class="login-wrapper">
+
+        <section class="login-card">
+
+            <div class="login-icon">
+                🔐
+            </div>
+
+            <h1>Admin Login</h1>
+
+            <p>
+                Sign in to manage computer lab complaints.
+            </p>
+
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="adminEmail">
+                        User
+                    </label>
+
+                    <input
+                        type="username"
+                        id="adminEmail"
+                        placeholder="admin"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="adminPassword">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <div
+                    id="loginError"
+                    class="error-message hidden"
+                ></div>
+
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="primary-button full-width"
+                >
+                    Login
+                </button>
+
+            </form>
+
+            <a href="index.html" class="back-link">
+                ← Back to Student Portal
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- DASHBOARD -->
+
+    <div id="dashboardPage" class="hidden">
+
+        <header class="admin-header">
+
+            <div class="header-inner">
+
+                <div class="admin-brand">
+
+                    <div class="brand-icon">
+                        💻
+                    </div>
+
+                    <div>
+                        <h1>Lab Complaint Portal</h1>
+                        <span>Administration Dashboard</span>
+                    </div>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <span id="adminEmailDisplay"></span>
+
+                    <button
+                        id="saveButton"
+                        class="save-button"
+                    >
+                        Save Changes
+                    </button>
+
+                    <button
+                        id="logoutButton"
+                        class="logout-button"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <main class="dashboard-container">
+
+
+            <!-- DASHBOARD TOP -->
+
+            <section class="dashboard-title">
+
+                <div>
+
+                    <span class="eyebrow">
+                        COMPUTER LAB MANAGEMENT
+                    </span>
+
+                    <h2>Reported Problems</h2>
+
+                    <p>
+                        Review, update and manage reported computer issues.
+                    </p>
+
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <span>Total</span>
+
+                        <strong id="totalCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span>Open</span>
+
+                        <strong id="openCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <span>Fixed</span>
+
+                        <strong id="fixedCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FILTERS -->
+
+            <section class="filter-panel">
+
+                <div class="search-wrapper">
+
+                    <label for="searchInput">
+                        Search complaints
+                    </label>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search crash, Python, C, VS Code..."
+                    >
+
+                </div>
+
+
+                <div class="filter-wrapper">
+
+                    <label for="labFilter">
+                        Lab room
+                    </label>
+
+                    <select id="labFilter">
+
+                        <option value="all">
+                            All Labs
+                        </option>
+
+                        <option value="103">
+                            Lab 103
+                        </option>
+
+                        <option value="115">
+                            Lab 115
+                        </option>
+
+                        <option value="121">
+                            Lab 121
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="filter-wrapper">
+
+                    <label for="statusFilter">
+                        Status
+                    </label>
+
+                    <select id="statusFilter">
+
+                        <option value="all">
+                            All Status
+                        </option>
+
+                        <option value="OPEN">
+                            Open
+                        </option>
+
+                        <option value="FIXED">
+                            Fixed
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- TABLE -->
+
+            <section class="table-card">
+
+                <div class="table-header">
+
+                    <div>
+                        <h3>Complaints</h3>
+
+                        <span id="resultCount">
+                            0 complaints
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Student</th>
+
+                                <th>Roll Number</th>
+
+                                <th>Date & Time</th>
+
+                                <th>Lab</th>
+
+                                <th>System</th>
+
+                                <th>Complaint</th>
+
+                                <th>Status</th>
+
+                                <th>Actions</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="complaintsTableBody">
+
+                        </tbody>
+
+                    </table>
+
+
+                    <div
+                        id="emptyState"
+                        class="empty-state hidden"
+                    >
+
+                        <div>
+                            ✓
+                        </div>
+
+                        <h3>No complaints found</h3>
+
+                        <p>
+                            There are no complaints matching the current filters.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- CONFIRMATION MODAL -->
+
+    <div
+        id="confirmModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-icon">
+                ⚠
+            </div>
+
+            <h2 id="modalTitle">
+                Confirm Action
+            </h2>
+
+            <p id="modalMessage">
+                Are you sure?
+            </p>
+
+
+            <div class="modal-actions">
+
+                <button
+                    id="modalCancel"
+                    class="secondary-button"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    id="modalConfirm"
+                    class="danger-button"
+                >
+                    Confirm
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- UNSAVED CHANGES MODAL -->
+
+    <div
+        id="unsavedModal"
+        class="modal hidden"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-icon warning">
+                !
+            </div>
+
+            <h2>
+                Unsaved Changes
+            </h2>
+
+            <p>
+                You have changes that haven't been saved.
+                If you leave this page now, those changes will be lost.
+            </p>
+
+
+            <div class="modal-actions">
+
+                <button
+                    id="stayButton"
+                    class="secondary-button"
+                >
+                    Stay
+                </button>
+
+                <button
+                    id="leaveButton"
+                    class="danger-button"
+                >
+                    Leave Anyway
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+
+</html>

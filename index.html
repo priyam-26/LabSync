@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LabSync</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <section class="card student-card">
+
+            <div class="brand">
+                <div class="brand-icon">💻</div>
+
+                <div>
+                    <h1>Lab Complaint Portal</h1>
+                    <p>Report a problem with a computer system</p>
+                </div>
+            </div>
+
+            <!-- STUDENT INFORMATION -->
+
+            <div id="studentInfoSection">
+
+                <div class="section-heading">
+                    <span>01</span>
+                    <div>
+                        <h2>Student Information</h2>
+                        <p>Enter your details before reporting an issue.</p>
+                    </div>
+                </div>
+
+                <form id="studentInfoForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="studentName">
+                                Student Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="studentName"
+                                placeholder="Enter your full name"
+                                maxlength="100"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rollNumber">
+                                Registration Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="rollNumber"
+                                placeholder="Enter registration number"
+                                inputmode="numeric"
+                                pattern="117[0-9]{7,}"
+                                minlength="10"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="primary-button">
+                        Continue
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- COMPLAINT FORM -->
+
+            <div id="complaintSection" class="hidden">
+
+                <div class="student-banner">
+                    <div>
+                        <span class="small-label">REPORTING AS</span>
+                        <strong id="displayStudentName"></strong>
+                    </div>
+
+                    <button id="changeStudentButton" class="text-button">
+                        Change
+                    </button>
+                </div>
+
+
+                <div class="section-heading">
+                    <span>02</span>
+
+                    <div>
+                        <h2>Report a Problem</h2>
+                        <p>Tell us which computer is having an issue.</p>
+                    </div>
+                </div>
+
+
+                <form id="complaintForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="labRoom">
+                                Lab Room Number
+                            </label>
+
+                            <select id="labRoom" required>
+                                <option value="">Select lab room</option>
+                                <option value="103">103</option>
+                                <option value="115">115</option>
+                                <option value="121">121</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="systemNumber">
+                                System Number
+                            </label>
+
+                            <input
+                                type="number"
+                                id="systemNumber"
+                                placeholder="e.g. 03"
+                                min="01"
+                                max="99"
+                                step="1"
+                                required
+                            >
+
+                            <small>
+                                Enter a positive two-digit system number.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div class="label-row">
+                            <label for="complaint">
+                                Complaint
+                            </label>
+
+                            <span id="wordCounter">
+                                0 / 100 words
+                            </span>
+                        </div>
+
+                        <textarea
+                            id="complaint"
+                            placeholder="Describe the problem, for example: VS Code is not opening on this computer..."
+                            rows="6"
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="submitButton"
+                        class="primary-button"
+                    >
+                        Submit Complaint
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- SUCCESS -->
+
+            <div id="successSection" class="hidden success-section">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+                <h2>Complaint Submitted</h2>
+
+                <p>
+                    Your complaint has been successfully recorded.
+                    The lab staff can now review it.
+                </p>
+
+                <div class="success-details">
+
+                    <div>
+                        <span>Lab</span>
+                        <strong id="successLab"></strong>
+                    </div>
+
+                    <div>
+                        <span>System</span>
+                        <strong id="successSystem"></strong>
+                    </div>
+
+                </div>
+
+                <button
+                    id="newComplaintButton"
+                    class="secondary-button"
+                >
+                    Report Another Problem
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            Computer Lab Complaint Portal
+        </footer>
+
+    </main>
+
+
+    <script src="js/config.js"></script>
+    <script src="js/student.js"></script>
+
+</body>
+</html>
