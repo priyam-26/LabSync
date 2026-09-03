@@ -72,11 +72,23 @@ body {
 
 
 .brand {
-    display: flex;
+    /* display: flex; */
     gap: 18px;
+    /* align-items: center; */
+
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+
+    /* align-items: center; */
+    /* justify-content: center; */
 
     margin-bottom: 42px;
+    text-align: center;
 }
 
 
@@ -433,12 +445,14 @@ small {
 }
 
 
-footer {
+footer .dept {
     color: var(--muted);
 
     font-size: 12px;
 
     margin-top: 20px;
+
+    padding-bottom: 0px;
 }
 
 
@@ -527,8 +541,46 @@ footer {
 
 @media (max-width: 650px) {
 
+    .page {
+        padding: 24px 14px;
+    }
+
     .card {
-        padding: 25px;
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    .brand {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+
+    .brand-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 23px;
+    }
+
+    .brand h1 {
+        font-size: clamp(20px, 6vw, 23px);
+    }
+
+    .brand p {
+        font-size: 13px;
+    }
+
+    .section-heading {
+        gap: 11px;
+        margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 17px;
+    }
+
+    .section-heading p {
+        font-size: 13px;
     }
 
     .form-grid {
@@ -536,11 +588,92 @@ footer {
         gap: 0;
     }
 
-    .brand h1 {
-        font-size: 21px;
+    .form-group label {
+        font-size: 13px;
+    }
+
+    input,
+    select,
+    textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+
+    .primary-button {
+        padding: 13px 16px;
+        font-size: 14px;
+    }
+
+    .student-banner {
+        padding: 12px 13px;
+        margin-bottom: 24px;
+    }
+
+    .student-banner strong {
+        font-size: 13px;
+    }
+
+    .success-section h2 {
+        font-size: 22px;
     }
 
     .success-details {
         flex-direction: column;
+    }
+
+    footer {
+        font-size: 11px;
+        margin-top: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .page {
+        padding: 16px 10px;
+    }
+
+    .card {
+        padding: 24px 16px;
+        border-radius: 14px;
+    }
+
+    .brand {
+        margin-bottom: 28px;
+    }
+
+    .brand h1 {
+        font-size: 20px;
+    }
+
+    .brand p {
+        font-size: 12px;
+    }
+
+    .section-heading > span {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .section-heading h2 {
+        font-size: 16px;
+    }
+
+    .section-heading p {
+        font-size: 12px;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .primary-button {
+        font-size: 13px;
     }
 }
