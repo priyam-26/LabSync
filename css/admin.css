@@ -31,6 +31,8 @@
 
     box-shadow:
         0 20px 60px rgba(15, 23, 42, 0.08);
+
+    text-align: center;
 }
 
 
@@ -48,7 +50,7 @@
 
     font-size: 25px;
 
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
 }
 
 
@@ -61,6 +63,10 @@
     color: #64748b;
 
     margin: 7px 0 30px;
+}
+
+.login-card form {
+    text-align: left;
 }
 
 
@@ -438,7 +444,8 @@ tbody tr:hover {
 
 
 .system-badge {
-    font-weight: 800;
+    /* align-items: center; */
+    font-weight: 700;
 
     font-size: 15px;
 }
@@ -582,6 +589,7 @@ tbody tr:hover {
         flex-direction: column;
 
         align-items: flex-start;
+        padding: 14px 18px;
     }
 
     .header-actions {
@@ -591,13 +599,49 @@ tbody tr:hover {
     #adminEmailDisplay {
         display: none;
     }
+
+    .dashboard-container {
+        padding: 30px 18px;
+    }
+
+    .dashboard-title h2 {
+        font-size: 27px;
+    }
 }
 
 
 @media (max-width: 550px) {
 
     .dashboard-container {
-        padding: 25px 12px;
+        padding: 22px 12px;
+    }
+
+    .header-inner {
+        padding: 12px;
+    }
+
+    .admin-brand h1 {
+        font-size: 16px;
+    }
+
+    .admin-brand span {
+        font-size: 11px;
+    }
+
+    .admin-brand .brand-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 19px;
+    }
+
+    .header-actions {
+        gap: 7px;
+    }
+
+    .save-button,
+    .logout-button {
+        padding: 9px 11px;
+        font-size: 12px;
     }
 
     .stats {
@@ -607,14 +651,95 @@ tbody tr:hover {
     .stat-card {
         flex: 1;
         min-width: 0;
+        padding: 12px 14px;
+    }
+
+    .stat-card span {
+        font-size: 10px;
     }
 
     .stat-card strong {
         font-size: 20px;
     }
 
+    .dashboard-title h2 {
+        font-size: 24px;
+    }
+
+    .dashboard-title p {
+        font-size: 13px;
+    }
+
+    .filter-panel {
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .table-header {
+        padding: 15px 16px;
+    }
+
+    .login-wrapper {
+        padding: 14px;
+    }
+
     .login-card {
-        padding: 28px 22px;
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    .login-card h1 {
+        font-size: 22px;
+    }
+
+    .login-card > p {
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .dashboard-container {
+        padding: 18px 9px;
+    }
+
+    .header-inner {
+        padding: 10px;
+    }
+
+    .admin-brand h1 {
+        font-size: 15px;
+    }
+
+    .admin-brand span {
+        font-size: 10px;
+    }
+
+    .save-button,
+    .logout-button {
+        padding: 8px 9px;
+        font-size: 11px;
+    }
+
+    .dashboard-title h2 {
+        font-size: 22px;
+    }
+
+    .stat-card {
+        padding: 10px;
+    }
+
+    .stat-card strong {
+        font-size: 18px;
+    }
+
+    .login-card {
+        padding: 24px 16px;
+    }
+
+    .login-card h1 {
+        font-size: 20px;
     }
 }
 
